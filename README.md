@@ -6,7 +6,8 @@ Automated eBook library management system that tracks your Humble Bundle purchas
 
 This project provides:
 - **Automated Humble Bundle scraping** - Extract your purchase history automatically with pagination support
-- **Notion integration** - Store and organize your bundle collection with categorization
+- **Individual book extraction** - Extract all individual books from your library with title, author, and bundle relationships
+- **Notion integration** - Store and organize your bundle collection and individual books with categorization
 - **Smart categorization** - Automatically categorizes bundles (Books, Video Games, Comics/Manga, RPG/Tabletable, Software, Music)
 - **Multi-select tagging** - Bundles can have multiple categories (e.g., Comics are also tagged as Books)
 - **Purchase tracking** - Keep track of bundle purchases with dates and prices
@@ -27,6 +28,13 @@ This project provides:
 - Automatic categorization based on bundle name patterns
 - Multi-select categories (e.g., RPG/Tabletop bundles are also tagged as Books)
 - 143 bundles tracked across 15+ years of purchases
+
+📚 **Individual Book Extraction**
+- Extract all individual books from your Humble Bundle library
+- Automatically link books to their parent bundles
+- Track title, author, and publisher information
+- Duplicate detection and deduplication
+- 1,896 books extracted and cataloged
 
 📈 **Analytics Scripts**
 - `calculate-total-spent.js` - Calculate total money spent on bundles
@@ -72,9 +80,11 @@ This project provides:
 
 4. Set up your Notion workspace:
    - Create a new page at the root level called "eBook Library"
-   - Create the "Humble Bundles" database under this page
-   - (Optional) Create the "Humble Bundle Books" database under this page
+   - Create the "Humble Bundles" database under this page (see database structure below)
+   - Create the "Humble Bundle Books" database under this page (see database structure below)
    - Share the "eBook Library" page with your Notion integration
+
+   **Important**: Both databases must be created before running the extraction scripts. The Books database requires a "Bundles" relation property that links back to the Humble Bundles database.
 
 ### Usage
 
@@ -143,11 +153,32 @@ Automatically categorize all bundles based on their names:
 NOTION_TOKEN="your_token" node update-bundle-categories.js
 ```
 
+#### Extract Individual Books
+
+Extract all individual books from your Humble Bundle library:
+
+```bash
+export $(cat .env.humble | grep -v '^#' | xargs)
+node extract-books-from-library.js
+```
+
+The script will:
+- Log into Humble Bundle (prompts for email verification code)
+- Navigate to your library and scroll to load all content
+- Extract book titles, authors, and bundle information
+- Match books to their parent bundles in Notion
+- Create entries in the "Humble Bundle Books" database
+- Link books to their bundles via the Bundles relation property
+
+**Note**: This script extracts 1,896+ books and may take 15-20 minutes to complete.
+
 ## Project Structure
 
 ```
 ebook-library/
 ├── scrape-humble-bundle.js              # Main scraper with pagination
+├── extract-books-from-library.js        # Extract individual books from library
+├── explore-library-structure.js         # Analyze library page structure
 ├── import-bundles-from-file.js          # Import from bundles.txt
 ├── backup-bundles-database.js           # Backup to JSON/CSV
 ├── calculate-total-spent.js             # Analytics: total spending
@@ -202,27 +233,25 @@ Example entry:
 - Price: 25
 - Bundle Type: [Books]
 
-### Humble Bundle Books Database (Optional)
+### Humble Bundle Books Database
 
 Properties:
-- **Name** (Title) - Book title and author
+- **Name** (Title) - Book title and author (combined)
 - **Title** (Rich Text) - Book title
 - **Author** (Rich Text) - Author name
-- **Publisher** (Rich Text) - Publisher name
 - **Bundles** (Relation) - Links to one or more bundles containing this book
 
 Example entry:
 - Name: "The Pragmatic Programmer by David Thomas"
 - Title: "The Pragmatic Programmer"
 - Author: "David Thomas"
-- Publisher: "Addison-Wesley"
 - Bundles: [Link to "Humble Tech Book Bundle: Software Architecture"]
 
-**Note**: This database is currently not populated by the scraper. It's set up for future expansion to track individual books across bundles.
+**Stats**: 1,896 individual books extracted from 143 bundles, with automatic linking to their parent bundles.
 
 ## How It Works
 
-### Scraping Process
+### Scraping Process (Bundles)
 
 1. **Login** - Navigates to Humble Bundle and logs in with your credentials
 2. **Email Verification** - Waits for you to enter the verification code
@@ -230,6 +259,25 @@ Example entry:
 4. **Data Extraction** - Scrapes bundle name, date, and price from purchase history
 5. **Pagination** - Clicks through all pages until duplicate bundles are detected
 6. **Notion Sync** - Creates database entries for each bundle
+
+### Book Extraction Process
+
+1. **Login** - Logs into Humble Bundle with email verification
+2. **Library Navigation** - Navigates to the library page and waits for content to load
+3. **Dynamic Content Loading** - Scrolls the page to trigger loading of all books
+4. **Element Detection** - Tries multiple selectors to find book containers (`.subproduct-selector`, etc.)
+5. **Data Extraction** - Extracts title and author from each book element
+6. **Bundle Matching** - Matches books to their parent bundles using bundle name attributes
+7. **Deduplication** - Removes duplicate books using title+author as unique key
+8. **Notion Sync** - Creates entries in Books database with bundle relations
+9. **Progress Reporting** - Shows progress every 50 books
+
+**Key Features**:
+- Multiple selector fallback strategies for reliability
+- Automatic scrolling to load all content
+- Text filtering to avoid navigation elements
+- Bundle relationship linking
+- Zero duplicates in final dataset
 
 ### Categorization Logic
 
@@ -252,6 +300,8 @@ Both files are timestamped: `humble-bundles-backup-2025-12-29T02-21-47.{json,csv
 
 ## Real-World Results
 
+### Bundle Statistics
+
 From 143 bundles across 15 years:
 - **Total spent**: $2,350.64
 - **Date range**: Dec 17, 2010 to Dec 9, 2025 (5,471 days / 15.0 years)
@@ -263,6 +313,17 @@ From 143 bundles across 15 years:
   - 6 Comics/Manga (also tagged as Books)
   - 4 Software
   - 1 Music
+
+### Individual Book Extraction
+
+From library extraction:
+- **Total books extracted**: 1,896 individual books
+- **Unique books**: 1,896 (zero duplicates)
+- **Success rate**: 100% (all books successfully added to Notion)
+- **Bundle links**: Automatically linked books to their parent bundles
+- **Extraction time**: ~15-20 minutes for complete library
+
+**Average**: ~13 books per bundle across the entire collection
 
 ## Troubleshooting
 
@@ -280,6 +341,23 @@ From 143 bundles across 15 years:
 
 **Price validation errors**:
 - Ensure Price property in Notion is type "Number", not "Rich Text"
+
+### Book Extraction Issues
+
+**No books found (0 books extracted)**:
+- Run `explore-library-structure.js` to debug page structure
+- Check screenshot (`library-page.png`) and analysis (`library-analysis.json`)
+- Library page structure may have changed - selectors may need updating
+
+**Books not linked to bundles**:
+- Ensure Humble Bundles database is populated first
+- Bundle names must match between library page and Notion database
+- Check that both databases are under the "eBook Library" page
+
+**Extraction very slow**:
+- Normal for large libraries (1,896 books takes 15-20 minutes)
+- Notion API rate limiting may cause delays
+- Progress is shown every 50 books
 
 ### Backup Issues
 

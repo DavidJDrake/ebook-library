@@ -1,0 +1,57 @@
+{
+  "possibleBookContainers": [
+    {
+      "selector": "[class*=\"book\"]",
+      "count": 2,
+      "sampleText": ""
+    },
+    {
+      "selector": "[class*=\"item\"]",
+      "count": 201,
+      "sampleText": "\n  \n    \n    \n\n\n  \nBundlesOpen submenu"
+    },
+    {
+      "selector": "[class*=\"product\"]",
+      "count": 1209,
+      "sampleText": "\n  \n    100 Things Every Artist Should Know\n    The Quarto Group\n  \n  \n\n\n\n  \n    100 Things to See i"
+    }
+  ],
+  "possibleTitleSelectors": [],
+  "possibleAuthorSelectors": [],
+  "sampleHTML": "<nav id=\"navbar-mmenu\" class=\"font-size-reset mm-menu mm-menu_offcanvas mm-menu_border-none mm-menu_pagedim-black mm-menu_position-front\" aria-hidden=\"true\"><div class=\"mm-navbars_top\"><div class=\"mm-navbar\"><a class=\"mm-btn mm-btn_prev mm-navbar__btn mm-hidden\" aria-hidden=\"true\"></a><a class=\"mm-navbar__title\"><span><a class=\"mm-hb-logo-link\" href=\"/\"><img class=\"mm-hb-logo\" src=\"https://cdn.humblebundle.com/static/hashed/4814f84495cd679571cb94896978da3825562075.svg\"></a></span></a><div class=\"js-mmenu-close mm-custom-close-container\"><i class=\"hb hb-times mm-custom-close\"></i></div></div></div>\n  \n<div class=\"mm-panels\"><div id=\"mm-1\" class=\"mm-panel mm-panel_opened\"><div class=\"mm-navbar mm-navbar_sticky mm-hidden\" aria-hidden=\"true\"><a class=\"mm-navbar__title\"><span><a class=\"mm-hb-logo-link\" href=\"/\"><img class=\"mm-hb-logo\" src=\"https://cdn.humblebundle.com/static/hashed/4814f84495cd679571cb94896978da3825562075.svg\"></a></span></a></div><ul class=\"mm-listview\">\n\n      \n<li class=\"mm-listitem\">\n  \n    \n    \n\n\n  \n<a class=\"mm-btn mm-btn_next mm-listitem__btn mm-listitem__text\" href=\"#mm-2\">Bundles<span class=\"mm-sronly\">Open submenu</span></a></li>\n\n\n      \n<li class=\"mm-listitem\">\n  \n    \n    \n\n\n  \n<a class=\"mm-btn mm-btn_next mm-listitem__btn mm-listitem__text\" href=\"#mm-3\">Store<span class=\"mm-sronly\">Open submenu</span></a></li>\n\n\n      \n<li class=\"mm-listitem\">\n  \n    <a href=\"/membership\" class=\"mm-listitem__text\">Choice</a>\n  \n</li>\n\n\n      \n<li class=\"mm-listitem\">\n  \n    <a href=\"https://blog.humblebundle.com/\" class=\"mm-listitem__text\">Blog</a>\n  \n</li>\n\n\n      <li class=\"mm-nav-spacer mm-listitem\"></li>\n      <li class=\"mm-listitem\">\n  \n<a class=\"mm-btn mm-btn_next mm-listitem__btn mm-listitem__text\" href=\"#mm-8\">About<span class=\"mm-sronly\">Open submenu</span></a></li>\n      <li class=\"mm-nav-spacer mm-listitem\"></li>\n      \n<li class=\"mm-listitem\">\n  \n<a class=\"mm-btn mm-btn_next mm-listitem__btn mm-listitem__text\" href=\"#mm-9\">Account<span class=\"mm-sronly\">Open submenu</span></a></li>\n\n  </ul></div><div id=\"mm-2\" class=\"mm-panel mm-hidden\" aria-hidden=\"true\"><div class=\"mm-navbar mm-navbar_sticky mm-hidden\" aria-hidden=\"true\"><a class=\"mm-btn mm-btn_prev mm-navbar__btn\" href=\"#mm-1\"><span class=\"mm-sronly\">Close submenu</span></a><a class=\"mm-navbar__title\" href=\"#mm-1\" aria-hidden=\"true\"><span>Bundles</span></a></div><ul class=\"mm-listview\">\n  \n    \n      \n  <li class=\"mm-listitem\">\n    <a href=\"/games\" class=\"mm-listitem__text\">Games</a>\n  </li>\n      \n  <li class=\"mm-listitem\">\n    <a href=\"/books\" class=\"mm-listitem__text\">Books</a>\n  </li>\n      \n  <li class=\"mm-listitem\">\n    <a href=\"/software\" class=\"mm-listitem__text\">Software</a>\n  </li>\n      \n    \n  \n</ul></div><div id=\"mm-3\" class=\"mm-panel mm-hidden\" aria-hidden=\"true\"><div class=\"mm-navbar mm-navbar_sticky mm-hidden\" aria-hidden=\"true\"><a class=\"mm-btn mm-btn_prev mm-navbar__btn\" href=\"#mm-1\"><span class=\"mm-sronly\">Close submenu</span></a><a class=\"mm-navbar__title\" href=\"#mm-1\" aria-hidden=\"true\"><span>Store</span></a></div><ul class=\"mm-listview\">\n  \n    \n  <li class=\"mm-listitem\">\n    \n    \n  <a class=\"mm-btn mm-btn_next mm-listitem__btn mm-listitem__text\" href=\"#mm-4\">Popular<span class=\"mm-sronly\">Open submenu</span></a></li>\n    \n  \n    \n  <li class=\"mm-listitem\">\n    \n    \n  <a class=\"mm-btn mm-btn_next mm-listitem__btn mm-listitem__text\" href=\"#mm-5\">Top Genres<span class=\"mm-sronly\">Open submenu</span></a></li>\n    \n  \n    \n  <li class=\"mm-listitem\">\n    \n    \n  <a class=\"mm-btn mm-btn_next mm-listitem__btn mm-listitem__text\" href=\"#mm-6\">Top Platforms<span class=\"mm-sronly\">Open submenu</span></a></li>\n    \n  \n    \n  <li class=\"mm-listitem\">\n    \n    \n  <a class=\"mm-btn mm-btn_next mm-listitem__btn mm-listitem__text\" href=\"#mm-7\">Featured<span class=\"mm-sronly\">Open submenu</span></a></li>\n    \n  \n</ul></div><div id=\"mm-4\" class=\"mm-panel mm-hidden\" aria-hidden=\"true\"><div class=\"mm-navbar mm-navbar_sticky mm-hidden\" aria-hidden=\"true\"><a class=\"mm-btn mm-btn_prev mm-navbar__btn\" href=\"#mm-3\"><span class=\"mm-sronly\">Close submenu</span></a><a class=\"mm-navbar__title\" href=\"#mm-3\" aria-hidden=\"true\"><span>Popular</span></a></div><ul class=\"mm-listview\">\n      \n      <li class=\"mm-listitem\">\n        <a href=\"/store/search?sort=bestselling&amp;filter=onsale\" class=\"mm-listitem__text\">On Sale</a>\n      </li>\n      \n      <li class=\"mm-listitem\">\n        <a href=\"/store/search?sort=bestselling\" class=\"mm-listitem__text\">Bestselling</a>\n      </li>\n      \n      <li class=\"mm-listitem\">\n        <a href=\"/store/search?sort=newest&amp;filter=new\" class=\"mm-listitem__text\">New Releases</a>\n      </li>\n      \n      <li class=\"mm-listitem\">\n        <a href=\"/store/promo/pre-order/\" class=\"mm-listitem__text\">Pre-order</a>\n      </li>\n      \n      <li class=\"mm-listitem\">\n        <a href=\"/store/promo/books/\" class=\"mm-listitem__text\">Books</a>\n      </li>\n      \n      <li class=\"mm-listitem\">\n        <a href=\"/store/promo/sof",
+  "allClassNames": [
+    "about-item-dropdown-container",
+    "about-items",
+    "button-title",
+    "button-title\n\n\n",
+    "button-title\nnavbar-item-dropdown",
+    "column-items",
+    "hb-book",
+    "hb-facebook",
+    "js-search-item-dropdown-toggle",
+    "js-subproducts-holder",
+    "logo-navbar-item",
+    "mm-listitem",
+    "mm-listitem__btn",
+    "mm-listitem__text",
+    "mm-navbar__title",
+    "nav-dropdown-column-title",
+    "nav-dropdown-items",
+    "navbar-item",
+    "navbar-item-dropdown",
+    "navbar-item-dropdown-container",
+    "navbar-item-dropdown-item",
+    "navbar-item-dropdown-items",
+    "navbar-item-icon",
+    "navbar-item-text",
+    "non-link-item",
+    "page_title",
+    "subproduct-selector",
+    "subproducts-holder",
+    "tabs-navbar-item",
+    "user-item-dropdown-caret",
+    "user-item-dropdown-container",
+    "user-items",
+    "user-navbar-item"
+  ]
+}
