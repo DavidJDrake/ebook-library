@@ -165,12 +165,12 @@ node extract-books-from-library.js
 The script will:
 - Log into Humble Bundle (prompts for email verification code)
 - Navigate to your library and scroll to load all content
-- Extract book titles, authors, and bundle information
+- Extract book titles, publishers, and bundle information
 - Match books to their parent bundles in Notion
 - Create entries in the "Humble Bundle Books" database
 - Link books to their bundles via the Bundles relation property
 
-**Note**: This script extracts 1,896+ books and may take 15-20 minutes to complete.
+**Note**: This script extracts 1,896+ books and may take 15-20 minutes to complete. The extracted data populates the Publisher field (what appears as "author" in the library is typically the publisher).
 
 ## Project Structure
 
@@ -179,10 +179,13 @@ ebook-library/
 ├── scrape-humble-bundle.js              # Main scraper with pagination
 ├── extract-books-from-library.js        # Extract individual books from library
 ├── explore-library-structure.js         # Analyze library page structure
+├── move-author-to-publisher.js          # Migrate Author field data to Publisher
 ├── import-bundles-from-file.js          # Import from bundles.txt
 ├── backup-bundles-database.js           # Backup to JSON/CSV
 ├── calculate-total-spent.js             # Analytics: total spending
 ├── calculate-date-range.js              # Analytics: date range
+├── calculate-spending-by-category.js    # Analytics: spending by bundle type
+├── calculate-spending-by-year.js        # Analytics: spending by year
 ├── find-duplicate-purchases.js          # Analytics: duplicate detection
 ├── identify-game-bundles.js             # Categorize bundle types
 ├── update-bundle-categories.js          # Update all bundle categories
@@ -236,18 +239,22 @@ Example entry:
 ### Humble Bundle Books Database
 
 Properties:
-- **Name** (Title) - Book title and author (combined)
+- **Name** (Title) - Book title and publisher (combined)
 - **Title** (Rich Text) - Book title
-- **Author** (Rich Text) - Author name
+- **Author** (Rich Text) - Author name (currently empty, reserved for future population)
+- **Publisher** (Rich Text) - Publisher name
 - **Bundles** (Relation) - Links to one or more bundles containing this book
 
 Example entry:
-- Name: "The Pragmatic Programmer by David Thomas"
+- Name: "The Pragmatic Programmer by Addison-Wesley"
 - Title: "The Pragmatic Programmer"
-- Author: "David Thomas"
+- Author: (empty - to be populated)
+- Publisher: "Addison-Wesley"
 - Bundles: [Link to "Humble Tech Book Bundle: Software Architecture"]
 
 **Stats**: 1,896 individual books extracted from 143 bundles, with automatic linking to their parent bundles.
+
+**Note**: The Publisher field contains what was extracted from the library (often the actual publisher). The Author field is currently empty and available for future population with actual author names.
 
 ## How It Works
 
@@ -266,9 +273,9 @@ Example entry:
 2. **Library Navigation** - Navigates to the library page and waits for content to load
 3. **Dynamic Content Loading** - Scrolls the page to trigger loading of all books
 4. **Element Detection** - Tries multiple selectors to find book containers (`.subproduct-selector`, etc.)
-5. **Data Extraction** - Extracts title and author from each book element
+5. **Data Extraction** - Extracts title and publisher from each book element
 6. **Bundle Matching** - Matches books to their parent bundles using bundle name attributes
-7. **Deduplication** - Removes duplicate books using title+author as unique key
+7. **Deduplication** - Removes duplicate books using title+publisher as unique key
 8. **Notion Sync** - Creates entries in Books database with bundle relations
 9. **Progress Reporting** - Shows progress every 50 books
 
@@ -278,6 +285,7 @@ Example entry:
 - Text filtering to avoid navigation elements
 - Bundle relationship linking
 - Zero duplicates in final dataset
+- Publisher field populated with extracted data (Author field left empty for future use)
 
 ### Categorization Logic
 

@@ -250,7 +250,7 @@ async function extractBooks() {
             'Title': {
               rich_text: [{ type: 'text', text: { content: book.title } }]
             },
-            'Author': {
+            'Publisher': {
               rich_text: [{ type: 'text', text: { content: book.author || '' } }]
             },
             ...(bundleRelation.length > 0 && {
