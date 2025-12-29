@@ -70,7 +70,11 @@ This project provides:
    export NOTION_TOKEN="your_notion_integration_token"
    ```
 
-4. Create the Humble Bundles database in Notion and share it with your integration
+4. Set up your Notion workspace:
+   - Create a new page at the root level called "eBook Library"
+   - Create the "Humble Bundles" database under this page
+   - (Optional) Create the "Humble Bundle Books" database under this page
+   - Share the "eBook Library" page with your Notion integration
 
 ### Usage
 
@@ -164,6 +168,22 @@ ebook-library/
 └── README.md                            # This file
 ```
 
+## Notion Workspace Organization
+
+Your Notion workspace should be organized as follows:
+
+```
+Notion Workspace (root level)
+└── 📁 eBook Library
+    ├── 📊 Humble Bundles (database)
+    └── 📚 Humble Bundle Books (database - optional)
+```
+
+**Important**:
+- The "eBook Library" page should be at the workspace root level, not nested under other pages
+- Both databases must be under the "eBook Library" page
+- Share the "eBook Library" page with your Notion integration to grant access to all databases
+
 ## Notion Database Structure
 
 ### Humble Bundles Database
@@ -181,6 +201,24 @@ Example entry:
 - Purchase Date: 2025-12-09
 - Price: 25
 - Bundle Type: [Books]
+
+### Humble Bundle Books Database (Optional)
+
+Properties:
+- **Name** (Title) - Book title and author
+- **Title** (Rich Text) - Book title
+- **Author** (Rich Text) - Author name
+- **Publisher** (Rich Text) - Publisher name
+- **Bundles** (Relation) - Links to one or more bundles containing this book
+
+Example entry:
+- Name: "The Pragmatic Programmer by David Thomas"
+- Title: "The Pragmatic Programmer"
+- Author: "David Thomas"
+- Publisher: "Addison-Wesley"
+- Bundles: [Link to "Humble Tech Book Bundle: Software Architecture"]
+
+**Note**: This database is currently not populated by the scraper. It's set up for future expansion to track individual books across bundles.
 
 ## How It Works
 
