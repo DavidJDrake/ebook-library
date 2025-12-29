@@ -1,0 +1,26 @@
+{
+  "name": "backup-notion-db",
+  "description": "Creates file-based backups (JSON and CSV) of a Notion database",
+  "version": "2.0.0",
+  "author": "Claude Code",
+  "command": "node .claude/skills/backup-notion-db.js",
+  "usage": "/backup-notion-db <database_id>",
+  "examples": [
+    "/backup-notion-db a14c3451-3db6-4158-804c-2f404f31c179"
+  ],
+  "requirements": {
+    "env": [
+      "NOTION_TOKEN"
+    ],
+    "packages": [
+      "@notionhq/client"
+    ]
+  },
+  "notes": [
+    "Creates timestamped JSON backup with full data and metadata",
+    "Creates timestamped CSV backup for easy viewing in spreadsheet apps",
+    "Backups are saved to ./backups/ directory in the current working directory",
+    "The database must be shared with your Notion integration",
+    "For Notion-to-Notion backups, use Notion's built-in duplicate feature (⋯ menu > Duplicate)"
+  ]
+}
