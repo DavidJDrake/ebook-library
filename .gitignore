@@ -34,3 +34,9 @@ logs/
 # Personal data exports
 exports/
 backups/
+
+# Book extraction debug files
+library-page.html
+library-page.png
+extraction-debug.png
+error-screenshot.png
